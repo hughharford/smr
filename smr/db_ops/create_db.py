@@ -1,8 +1,11 @@
 import sqlite3
+import mysql.connector
+
 import pandas as pd
 
-from sql_commands import DB_TABLE_CREATE, DB_TABLE_CREATE_SHORT
+from sql_commands import DB_TABLE_CREATE
 from sql_commands import INSERT_INTO_SEARCHES, CONFIRM_DATA
+from sql_commands import CHECK_INCOMPLETE_INSERT
 
 
 DB_NAME = 'db/test_database.sqlite'
@@ -11,17 +14,33 @@ DB_NAME = 'db/test_database.sqlite'
 class SMR_Database():
 
     def __init__(self, connection):
+        # set default sqlite db
         self.conn = connection
+        self.c = conn.cursor()
+
 
     def create_database(self):
         self.c = self.conn.cursor()
         self.c.execute(DB_TABLE_CREATE)
         print('Created table within database...  ' + DB_NAME)
         self.conn.commit()
-        print('Commit made >>')
+
+    def create_mysql_db(self):
+        # set mysql db
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="yourusername",
+            password="yourpassword"
+        )
+        mycursor = mydb.cursor()
+        mycursor.execute("CREATE DATABASE test_mysql_db")
 
     def insert_data(self):
         self.c.execute(INSERT_INTO_SEARCHES)
+        self.conn.commit()
+
+    def insert_incomplete_data(self):
+        self.c.execute(CHECK_INCOMPLETE_INSERT)
         self.conn.commit()
 
 
@@ -39,8 +58,9 @@ if __name__ == "__main__":
 
     try:
         db = SMR_Database(conn)
-        db.create_database()
+        # db.create_database()
         db.insert_data()
+        db.insert_incomplete_data()
         db.confirm_contents()
 
     except Exception as e:

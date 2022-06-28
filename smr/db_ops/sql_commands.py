@@ -6,16 +6,8 @@ DB_TABLE_CREATE = '''CREATE TABLE IF NOT EXISTS searches
    ID INT PRIMARY KEY NOT NULL,
    [search_input] TEXT NOT NULL,
    [postcode] BOOLEAN NOT NULL,
-   [count_search] INTEGER,
+   [count_search] INTEGER DEFAULT 0,
    UNIQUE (ID, postcode)
-);'''
-
-DB_TABLE_CREATE_SHORT = '''CREATE TABLE IF NOT EXISTS searches
-(
-   ID INT PRIMARY KEY,
-   [search_input] TEXT NOT NULL,
-   [postcode] TEXT NOT NULL,
-   [count_search] INTEGER
 );'''
 
 
@@ -31,6 +23,17 @@ INSERT_INTO_SEARCHES = '''
         ('latt long','SE23 3YL', 23)
         ;
     '''
+
+CHECK_INCOMPLETE_INSERT = '''
+        INSERT INTO searches (
+            search_input
+            , postcode
+            )
+
+        VALUES
+        ('latt long','GL8')
+        ;
+'''
 
 CONFIRM_DATA = '''
             SELECT
