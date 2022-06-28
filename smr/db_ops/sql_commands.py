@@ -3,10 +3,16 @@
 
 DB_TABLE_CREATE = '''CREATE TABLE IF NOT EXISTS searches
 (
-   ID INT PRIMARY KEY NOT NULL,
-   [search_input] TEXT NOT NULL,
-   [postcode] BOOLEAN NOT NULL,
-   [count_search] INTEGER DEFAULT 0,
+   ID INT PRIMARY KEY,
+   search_input TEXT NOT NULL,
+   postcode BOOLEAN DEFAULT "empty",
+   count_search INTEGER DEFAULT 1,
+   max_roof_id_number INTEGER DEFAULT 0,
+   max_roof_area INTEGER DEFAULT 0,
+   max_roof_number_panels INTEGER DEFAULT 0,
+   total_count_roofs INTEGER DEFAULT 0,
+   total_count_panels INTEGER DEFAULT 0
+
    UNIQUE (ID, postcode)
 );'''
 
@@ -27,11 +33,11 @@ INSERT_INTO_SEARCHES = '''
 CHECK_INCOMPLETE_INSERT = '''
         INSERT INTO searches (
             search_input
-            , postcode
+
             )
 
         VALUES
-        ('latt long','GL8')
+        ('latt long')
         ;
 '''
 
@@ -41,4 +47,13 @@ CONFIRM_DATA = '''
             postcode,
             count_search
             FROM searches
+          '''
+
+CONFIRM_GL8_POSTCODE_SEARCH_COUNT_ZERO = '''
+            SELECT
+            search_input,
+            postcode,
+            count_search
+            FROM searches
+            WHERE postcode = "GL8"
           '''

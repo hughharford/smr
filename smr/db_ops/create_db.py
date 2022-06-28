@@ -61,11 +61,14 @@ if __name__ == "__main__":
 
     try:
         db = SMR_Database(conn)
-        # db.create_database()
-        db.create_mysql_db()
-        # db.insert_data()
-        # db.insert_incomplete_data()
-        # db.confirm_contents()
+        db.create_database()
+
+        db.insert_data()
+        # update this to take and then input values
+
+
+        db.insert_incomplete_data()
+        db.confirm_contents()
 
     except Exception as e:
         print(e)
