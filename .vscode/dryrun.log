@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jackhousego/code/hughharford/smr/smr'
+pip install -r requirements.txt
+make: Leaving directory `/Users/jackhousego/code/hughharford/smr/smr'
+ 
