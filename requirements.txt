@@ -29,4 +29,4 @@ memoized-property
 termcolor
 
 # database
- mysql-connector-python
+mysql-connector-python

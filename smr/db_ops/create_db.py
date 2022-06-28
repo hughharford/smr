@@ -7,6 +7,7 @@ from sql_commands import DB_TABLE_CREATE
 from sql_commands import INSERT_INTO_SEARCHES, CONFIRM_DATA
 from sql_commands import CHECK_INCOMPLETE_INSERT
 
+from smr.params import params_dict
 
 DB_NAME = 'db/test_database.sqlite'
 # db/test_database
@@ -27,10 +28,12 @@ class SMR_Database():
 
     def create_mysql_db(self):
         # set mysql db
+        # PARKED, still to set up mysql and get permissions etc working
+        # also, note, would need to set these up on the container too...
         mydb = mysql.connector.connect(
-            host="localhost",
-            user="yourusername",
-            password="yourpassword"
+            host=params_dict['HOST'],
+            user=params_dict['USER'],
+            password=params_dict['PASSWORD']
         )
         mycursor = mydb.cursor()
         mycursor.execute("CREATE DATABASE test_mysql_db")
@@ -59,9 +62,10 @@ if __name__ == "__main__":
     try:
         db = SMR_Database(conn)
         # db.create_database()
-        db.insert_data()
-        db.insert_incomplete_data()
-        db.confirm_contents()
+        db.create_mysql_db()
+        # db.insert_data()
+        # db.insert_incomplete_data()
+        # db.confirm_contents()
 
     except Exception as e:
         print(e)
