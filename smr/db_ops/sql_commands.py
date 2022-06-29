@@ -11,7 +11,7 @@ DB_TABLE_CREATE = '''CREATE TABLE IF NOT EXISTS searches
    max_roof_area INTEGER DEFAULT 0,
    max_roof_number_panels INTEGER DEFAULT 0,
    total_count_roofs INTEGER DEFAULT 0,
-   total_count_panels INTEGER DEFAULT 0
+   total_count_panels INTEGER DEFAULT 0,
 
    UNIQUE (ID, postcode)
 );'''
