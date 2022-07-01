@@ -4,8 +4,7 @@ import mysql.connector
 import pandas as pd
 
 from smr.db_ops.sql_commands import DB_TABLE_CREATE
-from smr.db_ops.sql_commands import INSERT_INTO_SEARCHES, CONFIRM_DATA
-from smr.db_ops.sql_commands import CHECK_INCOMPLETE_INSERT
+from smr.db_ops.sql_commands import INSERT_SEARCHES, CONFIRM_DATA
 
 from smr.params import db_dict, test_db_dict
 
@@ -22,36 +21,35 @@ class SMR_Database():
             # create test
             self.conn = sqlite3.connect(TEST_DB_NAME, timeout=0.00001)
             print('Connected to database...  ' + TEST_DB_NAME)
-            self.get_cursor()
-
         elif connection=='' and db_name == '':
             # create db connection
             self.conn = sqlite3.connect(DB_NAME, timeout=0.00001)
             print('Connected to database...  ' + DB_NAME)
-            self.get_cursor()
         else:
             self.conn = connection
-            self.c = conn.cursor()
-
+        self.get_cursor()
 
     def get_cursor(self):
         self.c = self.conn.cursor()
 
-    def create_table(self):
-        self.c.execute(DB_TABLE_CREATE)
+    def create_table(self, table_create_sql=DB_TABLE_CREATE):
+        self.c.execute(table_create_sql)
         print('Created table...  ')
         self.conn.commit()
 
-    def insert_data(self):
+    def run_query(self, query_sql=''):
+        if query_sql:
+            self.c.execute(query_sql)
+            print('Ran your query:  >>>> ' + query_sql)
+            self.conn.commit()
+        else:
+            print('to run a query, supply some sql')
+        return self.c.fetchall()
+
+    def insert_data(self, insert_sql=INSERT_SEARCHES):
         print('Inserted data...  ')
-        self.c.execute(INSERT_INTO_SEARCHES)
+        self.c.execute(insert_sql)
         self.conn.commit()
-
-    def insert_incomplete_data(self):
-        print('Inserted incomplete data...  ')
-        self.c.execute(CHECK_INCOMPLETE_INSERT)
-        self.conn.commit()
-
 
     def confirm_contents(self):
         self.c.execute(CONFIRM_DATA)
@@ -69,12 +67,7 @@ if __name__ == "__main__":
         db = SMR_Database(conn)
         db.get_cursor()
         db.create_table()
-
         db.insert_data()
-        # # update this to take and then input values
-
-
-        db.insert_incomplete_data()
         db.confirm_contents()
 
     except Exception as e:
