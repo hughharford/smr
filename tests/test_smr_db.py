@@ -70,3 +70,7 @@ def test_search_input_to_db():
 
 if __name__ == "__main__":
     test_search_input_to_db()
+
+    # tester = SMR_Database()
+    # tester.establish_smr_db() # create table if not there
+    # tester.check_n_input_search(data=data)
