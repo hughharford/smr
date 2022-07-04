@@ -17,37 +17,46 @@ DB_TABLE_CREATE = '''CREATE TABLE IF NOT EXISTS searches
 );'''
 
 
-
-INSERT_SEARCHES = '''
-        INSERT INTO searches (
+SELECT_ALL_DATA = '''
+            SELECT
             search_input,
             postcode,
-            count_search)
+            count_search
+            FROM searches
+          '''
 
-        VALUES
-        ('SE23 3YL','SE23 3YL', 45),
-        ('G3 xxx','G3 xxx', 1001),
-        ('latt long','SE23 3YL', 23)
-        ;
+COUNT_ALL_ROWS = '''
+    SELECT
+    count (*)
+    FROM searches;
     '''
 
-CONFIRM_DATA = '''
-            SELECT
-            search_input,
-            postcode,
-            count_search
-            FROM searches
-          '''
+COUNT_POSTCODE_STUB = '''
+    SELECT
+    count (*)
+    FROM searches
+    WHERE postcode LIKE 
+    '''
 
 
-CONFIRM_GL8_POSTCODE_SEARCH_COUNT_ZERO = '''
-            SELECT
-            search_input,
-            postcode,
-            count_search
-            FROM searches
-            WHERE postcode = "GL8"
-          '''
+SHOW_ALL_DB_TABLES = '''
+    SELECT name FROM sqlite_master
+    WHERE type="table"
+    ORDER BY name;
+    '''
+
+smr_db_sql = {
+    'DB_TABLE_CREATE': DB_TABLE_CREATE,
+    'SHOW_ALL_DB_TABLES': SHOW_ALL_DB_TABLES,
+    'COUNT_ALL_ROWS': COUNT_ALL_ROWS,
+    'SELECT_ALL_DATA': SELECT_ALL_DATA,
+    'COUNT_POSTCODE_STUB': COUNT_POSTCODE_STUB,
+    }
+
+##############################################
+
+##############################################
+
 
 TEST_DB_TABLE_CREATE = '''CREATE TABLE IF NOT EXISTS test_table
 (

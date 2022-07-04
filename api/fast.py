@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from smr.smr_db import SMR_Database
 
 app = FastAPI()
 
@@ -29,15 +30,21 @@ def save_search(search_input, postcode, count_search: int, max_roof_id_number: i
     # put params into a database
     data = {"search_input": search_input,
             "postcode": postcode,
-            "count_search": count_search,
+            # "count_search": count_search,
+            # took out the above, count_search is only in the db, I think
             "max_roof_id_number": max_roof_id_number,
             "max_roof_area": max_roof_area,
             "max_roof_number_panels": max_roof_number_panels,
             "total_count_roofs": total_count_roofs,
             "total_count_panels": total_count_panels
             }
-    # insted of return Logic here will pass abovee data into database
+
+
+    # insted of return Logic here will pass above data into database
+    # smr_db = SMR_Database()
+    # smr_db.check_n_input_search(data)
     return data
+
 
 @app.get("/view_search")
 def view_search(search_id):

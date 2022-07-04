@@ -3,7 +3,7 @@ import os.path
 from os import listdir
 from os.path import isfile, join
 
-from smr.db_ops.operate_db import SMR_Database
+from smr.db_ops.operate_db import RunDatabase
 from smr.params import test_db_dict
 from smr.db_ops.sql_commands import test_db_sql
 
@@ -21,7 +21,7 @@ TEST_INSERT = test_db_sql['TEST_INSERT']
 #  58, 61-82
 # DONE, now testing:
 
-def test_database_is_created():
+def test_operate_db():
 
     # delete any existing test_NAMED database
     #############################################################
@@ -53,20 +53,20 @@ def test_database_is_created():
     # test various __init__ options, create a test_db
 #############################################################
     # get db with full db name (as assumed in class)
-    db_without_fulldbname = SMR_Database()
+    db_without_fulldbname = RunDatabase()
     assert db_without_fulldbname
     db_without_fulldbname.close_connection()
     del db_without_fulldbname
 
     # get db with db name supplied via new connection
-    db_with_connection = SMR_Database(
+    db_with_connection = RunDatabase(
         connection=sqlite3.connect(TEST_DB_NAME))
     assert db_with_connection
     db_with_connection.close_connection()
     del db_with_connection
 
     # get db with only testname specified
-    db_with_testname = SMR_Database(db_name=TEST_DB_NAME)
+    db_with_testname = RunDatabase(db_name=TEST_DB_NAME)
     assert db_with_testname
     db = db_with_testname # rename for further tests below
     del db_with_testname
@@ -90,4 +90,4 @@ def test_database_is_created():
     del db
 
 if __name__ == "__main__":
-    test_database_is_created()
+    test_operate_db()()
