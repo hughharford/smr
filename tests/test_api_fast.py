@@ -9,6 +9,6 @@ def test_save_search():
                     max_roof_number_panels=1,
                     total_count_roofs=1,
                     total_count_panels=5)
-    assert res['total_count_panels'] == 1
+    assert res['total_count_panels'] == 5
 
 # test_save_search()
