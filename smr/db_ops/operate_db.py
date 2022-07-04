@@ -34,49 +34,47 @@ class SMR_Database():
 
     def create_table(self, table_create_sql=DB_TABLE_CREATE):
         self.c.execute(table_create_sql)
-        print('Created table...  ')
         self.conn.commit()
+        print('Created table...  ')
 
     def run_query(self, query_sql=''):
         if query_sql:
             self.c.execute(query_sql)
-            print('Ran your query:  >>>> ' + query_sql)
             self.conn.commit()
-        else:
-            print('to run a query, supply some sql')
-        return self.c.fetchall()
+            print('Ran your query:  >>>> ' + query_sql)
+            return self.c.fetchall()
 
     def insert_data(self, insert_sql=INSERT_SEARCHES):
-        print('Inserted data...  ')
-        self.c.execute(insert_sql)
-        self.conn.commit()
+        if insert_sql:
+            self.c.execute(insert_sql)
+            self.conn.commit()
+            print('Inserted data:  >>>> ' + insert_sql)
 
-    def confirm_contents(self):
-        self.c.execute(CONFIRM_DATA)
-        df = pd.DataFrame(
-            self.c.fetchall(),
-            columns=['search_input','postcode', 'count_search'])
-        print (df)
+    def get_content_df(self, contents_sql=''):
+        if contents_sql:
+            self.c.execute(contents_sql)
+            df = pd.DataFrame(self.c.fetchall())
+            return df
+
+    def close_connection(self):
+        if self.conn != None:
+            self.conn.close() # <-- This is important.
 
 if __name__ == "__main__":
+    pass
+    # conn = sqlite3.connect(DB_NAME, timeout=0.00001)
+    # print('Connected to database...  ' + DB_NAME)
 
-    conn = sqlite3.connect(DB_NAME, timeout=0.00001)
-    print('Connected to database...  ' + DB_NAME)
+    # try:
+    #     db = SMR_Database(conn)
+    #     db.get_cursor()
+    #     db.create_table()
+    #     db.insert_data()
+    #     db.get_content_df()
+    # except Exception as e:
+    #     print(e)
 
-    try:
-        db = SMR_Database(conn)
-        db.get_cursor()
-        db.create_table()
-        db.insert_data()
-        db.confirm_contents()
-
-    except Exception as e:
-        print(e)
-
-    finally:
-        if conn != None:
-            pass
-    try:
-        conn.close() # <-- This is important
-    except Exception:
-        print(Exception)
+    # try:
+    #     conn.close() # <-- This is important
+    # except Exception:
+    #     print(Exception)

@@ -83,6 +83,7 @@ TEST_CONFIRM_DATA = '''
             postcode,
             count_search
             FROM test_table
+            WHERE search_input = "SE23 3YL"
           '''
 
 TEST_INCOMPLETE_INSERT = '''
@@ -101,12 +102,10 @@ TEST_SHOW_TABLES = '''
     '''
 
 TEST_COUNT_ROWS = '''
-            SELECT
-            search_input,
-            postcode,
-            count_search
-            FROM test_table
-          '''
+    SELECT
+    count (*)
+    FROM test_table;
+    '''
 
 test_db_sql = {
     'TEST_DB_TABLE_CREATE': TEST_DB_TABLE_CREATE,

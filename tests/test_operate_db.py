@@ -15,11 +15,11 @@ TEST_SHOW_TABLES = test_db_sql['TEST_SHOW_TABLES']
 TEST_COUNT_ROWS = test_db_sql['TEST_COUNT_ROWS']
 TEST_CONFIRM_DATA = test_db_sql['TEST_CONFIRM_DATA']
 TEST_INCOMPLETE_INSERT = test_db_sql['TEST_INCOMPLETE_INSERT']
-TEST_INSERT = test_db_sql['TEST_COUNT_ROWS']
+TEST_INSERT = test_db_sql['TEST_INSERT']
 
-# 220701 MISSING lines in operate_db:
-#  50-52, 55-59, 63-87
-# DONE, now testing: 27-34, 40-42, 45-47,
+# 220703 MISSING lines in operate_db:
+#  58, 61-82
+# DONE, now testing:
 
 def test_database_is_created():
 
@@ -42,10 +42,10 @@ def test_database_is_created():
 
     # assert that no. test_ files == 0
 #############################################################
-    testfiles = [f for f in listdir(TEST_DB_PATH)
-                 if isfile(join(TEST_DB_PATH, f))]
+    t_files = [f for f in listdir(TEST_DB_PATH)
+               if isfile(join(TEST_DB_PATH, f))]
     count = 0
-    for testfile in testfiles:
+    for testfile in t_files:
         if testfile[0:5] == 'test_':
             count+=1
     assert count == 0
@@ -55,12 +55,16 @@ def test_database_is_created():
     # get db with full db name (as assumed in class)
     db_without_fulldbname = SMR_Database()
     assert db_without_fulldbname
+    db_without_fulldbname.close_connection()
     del db_without_fulldbname
+
     # get db with db name supplied via new connection
     db_with_connection = SMR_Database(
         connection=sqlite3.connect(TEST_DB_NAME))
     assert db_with_connection
+    db_with_connection.close_connection()
     del db_with_connection
+
     # get db with only testname specified
     db_with_testname = SMR_Database(db_name=TEST_DB_NAME)
     assert db_with_testname
@@ -75,13 +79,15 @@ def test_database_is_created():
 
     #     to show that the db exists with the data
     db.insert_data(insert_sql=TEST_INSERT)
-    result = db.run_query(query_sql=TEST_CONFIRM_DATA)
-    print(result)
-    # assert len(result) > 0
+    df_result = db.get_content_df(contents_sql=TEST_CONFIRM_DATA)
+    assert df_result.shape[0] > 0
 
+    result = db.run_query(query_sql=TEST_COUNT_ROWS)
+    assert result[0][0] == 3
 
     # tidy up and delete the test_db
-    pass
+    db.close_connection()
+    del db
 
 if __name__ == "__main__":
     test_database_is_created()
