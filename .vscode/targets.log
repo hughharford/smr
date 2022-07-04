@@ -6,16 +6,14 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Tue Jun 28 15:50:13 2022
+# Make data base, printed on Mon Jul  4 14:23:18 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
- 
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
@@ -45,10 +43,10 @@ MAKEFILE_LIST :=  Makefile
 VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
-# makefile (from `Makefile', line 47)
+# makefile (from `Makefile', line 51)
 PYPI_USERNAME = <AUTHOR>
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/8p/6sf551p9047cxlv5twmltrp00000gn/T/vscode-ipc-cda8d9c4-f79e-4fb7-aad9-1142fb6d00be.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/8p/6sf551p9047cxlv5twmltrp00000gn/T/vscode-ipc-d7f69367-3248-4301-a38a-147f186efb4b.sock
 # environment
 VSCODE_CWD = /Users/jackhousego/code/hughharford/smr/smr
 # environment
@@ -66,7 +64,7 @@ PYENV_ROOT = /Users/jackhousego/.pyenv
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.h25MWFUMvA/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.mSTyqseeLb/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -114,7 +112,7 @@ USER = jackhousego
 # makefile
 .DEFAULT_GOAL := install_requirements
 # environment
-TERM_SESSION_ID = 448256D1-DBA4-4E7C-86E0-643F2D03D49E
+TERM_SESSION_ID = 57896B1D-2256-4511-BCDC-219CE9A6B09D
 # environment
 LESS = -R
 # automatic
@@ -144,7 +142,7 @@ TERM_PROGRAM_VERSION = 443
 # environment
 NVM_DIR = /Users/jackhousego/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.9346758.9346764.A9243637-6B8C-4C3B-A303-667D477AF1DC
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.9346758.9346764.391EE68A-3F92-4142-8ECC-85F05217D971
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -182,7 +180,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 33707
+VSCODE_PID = 11275
 # variable set hash-table stats:
 # Load=85/1024=8%, Rehash=0, Collisions=2/111=2%
 
@@ -192,9 +190,9 @@ VSCODE_PID = 33707
 
 # Directories
 
-# . (device 16777233, inode 10062165): 18 files, no impossibilities.
+# . (device 16777234, inode 10062165): 19 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 19 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -206,7 +204,7 @@ run_api_local:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 61):
+#  commands to execute (from `Makefile', line 65):
 	uvicorn api.fast:app --reload # load web server with code autoreload
 	
 
@@ -239,7 +237,7 @@ pypi:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 55):
+#  commands to execute (from `Makefile', line 59):
 	@twine upload dist/* -u $(PYPI_USERNAME)
 	
 
@@ -252,7 +250,7 @@ pypi:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-28 14:26:53
+#  Last modified 2022-07-04 11:33:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -271,7 +269,7 @@ build:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 49):
+#  commands to execute (from `Makefile', line 53):
 	@python setup.py sdist bdist_wheel
 	
 
@@ -287,7 +285,7 @@ count_lines:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 38):
 	@find ./ -name '*.py' -exec  wc -l {} \; | sort -n| awk \
 	'{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
@@ -302,6 +300,7 @@ count_lines:
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -327,10 +326,9 @@ clean:
 # ^ := 
 # automatic
 # ? := 
- 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 25):
 	@rm -f */version.txt
 	@rm -f .coverage
 	@rm -fr */__pycache__ */*.pyc __pycache__
@@ -339,11 +337,20 @@ clean:
 	@rm -fr smr.egg-info
 	
 
-ftest:
+test_bdd:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 18):
+	@coverage run -m pytest
+	@coverage report -m --omit="${VIRTUAL_ENV}/lib/python*"
+	
+
+ftest:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 22):
 	@Write me
 	
 
@@ -351,7 +358,7 @@ pypi_test:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 52):
+#  commands to execute (from `Makefile', line 56):
 	@twine upload -r testpypi dist/* -u $(PYPI_USERNAME)
 	
 
@@ -359,12 +366,12 @@ install:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 29):
+#  commands to execute (from `Makefile', line 33):
 	@pip install . -U
 	
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=1/35=3%
+# Load=17/1024=2%, Rehash=0, Collisions=1/36=3%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -375,7 +382,8 @@ install:
 # # of strcache buffers: 1
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+ 
 
-# Finished Make data base on Tue Jun 28 15:50:13 2022
+# Finished Make data base on Mon Jul  4 14:23:18 2022
 
  

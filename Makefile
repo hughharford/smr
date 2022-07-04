@@ -62,4 +62,4 @@ pypi:
 #      RUN API SERVER LOCALLY
 # ----------------------------------
 run_api_local:
-	uvicorn api.fast:app --reload # load web server with code autoreload
+	uvicorn api.smr_api:app --reload # load web server with code autoreload
