@@ -1,4 +1,4 @@
-from api.fast import save_search
+from api.smr_api import save_search
 
 def test_save_search():
     res = save_search(search_input='test',

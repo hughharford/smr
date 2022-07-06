@@ -1,9 +1,11 @@
 import sqlite3
-import mysql.connector
+# from turtle import pos
+# import mysql.connector
 
 import pandas as pd
 
 from smr.params import db_dict, test_db_dict
+from smr.db_ops.sql_commands import test_db_sql, select_by_postcode, test_select_by_postcode
 
 DB_PATH = db_dict['DB_PATH']
 DB_NAME = db_dict['DB_NAME']
@@ -79,7 +81,8 @@ if __name__ == "__main__":
     #     db.get_cursor()
     #     db.create_table()
     #     db.insert_data()
-    #     db.get_content_df()
+    #     df = db.get_content_df()
+
     # except Exception as e:
     #     print(e)
 

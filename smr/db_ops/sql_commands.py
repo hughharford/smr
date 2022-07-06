@@ -25,6 +25,19 @@ SELECT_ALL_DATA = '''
             FROM searches
           '''
 
+def select_by_postcode(postcode):
+    """
+    Function to return SELECT_BY_POSTCODE sql query
+    when passed a valid UK postcode.
+    """
+    SELECT_BY_POSTCODE = f'''
+                SELECT *
+                FROM searches
+                WHERE postcode = "{postcode}";
+            '''
+    return SELECT_BY_POSTCODE
+
+
 COUNT_ALL_ROWS = '''
     SELECT
     count (*)
@@ -35,7 +48,7 @@ COUNT_POSTCODE_STUB = '''
     SELECT
     count (*)
     FROM searches
-    WHERE postcode LIKE 
+    WHERE postcode LIKE
     '''
 
 
@@ -115,6 +128,18 @@ TEST_COUNT_ROWS = '''
     count (*)
     FROM test_table;
     '''
+def test_select_by_postcode(postcode):
+    """
+    Function to return SELECT_BY_POSTCODE sql query
+    when passed a valid UK postcode.
+    """
+    TEST_SELECT_BY_POSTCODE = f'''
+                SELECT *
+                FROM test_table
+                WHERE postcode = "{postcode}";
+            '''
+    return TEST_SELECT_BY_POSTCODE
+
 
 test_db_sql = {
     'TEST_DB_TABLE_CREATE': TEST_DB_TABLE_CREATE,
