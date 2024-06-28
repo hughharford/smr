@@ -2,13 +2,12 @@
 - Document here the project: smr
 - Description: Le Wagon Python Data Science final project: uses a neural network 
                to classify roofs based on the post code you supply. 
-- Data Source: Training data source: 
-- Type of analysis:
+               This sister repo is for database recording of post-code search 
+               and their results.
+- Data Source: Training data source is the [INRIA](https://project.inria.fr/aerialimagelabeling/) 405 sq km labelled data
+- Type of analysis: U-Net neural-network, using VGG-16 transfer learning
 
-Please document the project the better you can.
-
-# Install & run
-
+# Install
 Go to `git@github.com:hughharford/smr.git` to see the project
 
 Install virtualenv if you don't have it already
@@ -29,11 +28,5 @@ pip install -r requirements.txt
 make clean install test                # install and test
 ```
 
-Functionnal test with a script:
+# Once installed: run
 
-```bash
-cd
-mkdir tmp
-cd tmp
-smr-run
-```
