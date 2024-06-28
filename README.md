@@ -1,69 +1,34 @@
 # Data analysis
 - Document here the project: smr
-- Description: Project Description
-- Data Source:
+- Description: Le Wagon Python Data Science final project: uses a neural network 
+               to classify roofs based on the post code you supply. 
+- Data Source: Training data source: 
 - Type of analysis:
 
 Please document the project the better you can.
 
-# Startup the project
+# Install & run
 
-The initial setup.
+Go to `git@github.com:hughharford/smr.git` to see the project
 
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
-
-Unittest test:
-```bash
-make clean install test
-```
-
-Check for smr in gitlab.com/{group}.
-If your project is not set please add it:
-
-- Create a new project on `gitlab.com/{group}/smr`
-- Then populate it:
-
-```bash
-##   e.g. if group is "{group}" and project_name is "smr"
-git remote add origin git@github.com:{group}/smr.git
-git push -u origin master
-git push -u origin --tags
-```
-
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-smr-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/smr` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
+Install virtualenv if you don't have it already
+Create a python3 virtual environment called 'smr_env' and set it locally:
 
 ```bash
 sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
+pyenv virtualenv 3.10.6 smr_env
+pyenv local smr_env 
 ```
 
-Clone the project and install it:
+Clone the project via ssh (presume you've got this sorted) and install it:
 
 ```bash
-git clone git@github.com:{group}/smr.git
+git clone git@github.com:hughharford/smr.git
 cd smr
 pip install -r requirements.txt
 make clean install test                # install and test
 ```
+
 Functionnal test with a script:
 
 ```bash
